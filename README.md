@@ -1,20 +1,35 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🌑 SIDERA RPG Platform
 
-# Run and deploy your AI Studio app
+Uma plataforma de **Virtual Tabletop (VTT)** desenvolvida sob medida para o sistema de RPG *Sidera*. Focada em horror cósmico, escassez de recursos e narrativa imersiva.
 
-This contains everything you need to run your app locally.
+![Sidera Banner](https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6)
 
-View your app in AI Studio: https://ai.studio/apps/drive/1SzWNBen_u5T78B-ntm-EN1uh5qvxsL7a
+## 🔥 Funcionalidades Principais
 
-## Run Locally
+### Para o Vinculado (Jogador)
+- **Ficha Viva:** Cálculos automáticos de Vida, Atributos e Órbita.
+- **Arsenal Tático:** Gestão de munição, durabilidade de escudos e mecânica de "sacrifício de item".
+- **Farmacopeia:** Uso rápido de consumíveis com feedbacks visuais.
+- **Identidade:** Upload de avatar e customização de história.
 
-**Prerequisites:**  Node.js
+### Para o Observador (Mestre)
+- **Observatório (Dashboard):** Monitoramento em tempo real da saúde e sanidade de todos os jogadores.
+- **Intervenção Divina:** Capacidade de alterar status, curar ou punir jogadores remotamente.
+- **Projetor Mental:** Envio de imagens e sussurros secretos direto para a tela dos jogadores.
+- **Gerenciador de Ameaças:** Bestiário integrado e rolagem de dados de monstros.
 
+## 🛠️ Tecnologias
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- **Frontend:** React 18, TypeScript, Vite
+- **Estilização:** Tailwind CSS (Design System Diegético)
+- **Backend & Realtime:** Supabase (PostgreSQL, Realtime Subscriptions, Storage)
+- **Animações:** Framer Motion
+
+## 🚀 Como Rodar Localmente
+
+1. Clone o repositório.
+2. Instale as dependências: `npm install`
+3. Configure as variáveis de ambiente no arquivo `.env.local`:
+   ```env
+   VITE_SUPABASE_URL=sua_url
+   VITE_SUPABASE_ANON_KEY=sua_chave
