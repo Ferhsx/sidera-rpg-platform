@@ -2,7 +2,7 @@
 
 Uma plataforma de **Virtual Tabletop (VTT)** desenvolvida sob medida para o sistema de RPG *Sidera*. Focada em horror cósmico, escassez de recursos e narrativa imersiva.
 
-![Sidera Banner](https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6)
+![Sidera Banner]()
 
 ## 🔥 Funcionalidades Principais
 
