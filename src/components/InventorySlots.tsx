@@ -95,7 +95,7 @@ export const InventorySlots: React.FC = () => {
                     const item = slots[slotIndex];
 
                     return (
-                        <div
+                        <div title={item?.description || "Espaço de Inventário"}
                             key={slotIndex}
                             className={`
                                 flex items-center gap-2 p-2 border transition-all duration-200

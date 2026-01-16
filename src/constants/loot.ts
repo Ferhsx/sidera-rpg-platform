@@ -67,6 +67,13 @@ export const GM_LOOT: LootItem[] = [
         description: "Recupera condições mentais.",
         data: { targetId: 'salts', amount: 1 }
     },
+    {
+        id: 'poppy_pack',
+        name: 'Papoula Branca(x1)',
+        type: 'consumable',
+        description: "Recarrega 1 uso de Papoula. Alivia a dor corporal.",
+        data: { targetId: 'poppy', amount: 1 }
+    },
 
     // --- GERAIS (Vai para o inventário de texto) ---
     {

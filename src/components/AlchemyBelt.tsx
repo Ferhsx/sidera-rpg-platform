@@ -118,8 +118,11 @@ const AlchemyBelt: React.FC = () => {
         const hasAmmo = item.quantity > 0;
 
         return (
-            <div className={`group flex items-center justify-between p-2 rounded-sm border transition-all ${hasAmmo ? 'bg-stone-900/30 border-stone-800 hover:border-stone-700' : 'bg-transparent border-stone-900/50 opacity-40'
-                }`}>
+            <div
+                title={rule}
+                className={`group flex items-center justify-between p-2 rounded-sm border transition-all ${hasAmmo ? 'bg-stone-900/30 border-stone-800 hover:border-stone-700' : 'bg-transparent border-stone-900/50 opacity-40'
+                    }`}
+            >
                 <div className="flex items-center gap-3">
                     <div className={`p-2 rounded bg-black/40 border border-stone-800 ${hasAmmo ? color : 'text-stone-700'}`}>
                         <Icon size={14} />

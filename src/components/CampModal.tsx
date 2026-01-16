@@ -66,7 +66,8 @@ export const CampModal: React.FC<CampModalProps> = ({ isOpen, onClose }) => {
 
             updateCharacter({
                 currentHp: newHp,
-                orbit: newOrbit
+                orbit: newOrbit,
+                conditions: [] // Limpa todos os efeitos no descanso longo
             });
 
             if (dbInfo?.roomId) {

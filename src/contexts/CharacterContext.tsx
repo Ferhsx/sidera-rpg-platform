@@ -215,9 +215,20 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         setCharacter(prev => ({ ...prev, ...updates }));
     };
 
-    const resetCharacter = () => {
+    const resetCharacter = async () => {
+        // Deletar do banco se estiver em uma sala
+        if (dbInfo.charId) {
+            await supabase
+                .from('characters')
+                .delete()
+                .eq('id', dbInfo.charId);
+        }
+
         setCharacter(INITIAL_CHARACTER);
         localStorage.removeItem('sidera_character');
+        setDbInfoState({ roomId: null, charId: null });
+        sessionStorage.removeItem('sidera_session');
+        setViewState('lobby');
     };
 
     const advanceRound = () => {

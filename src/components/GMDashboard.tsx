@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Eye, Skull, Zap, Activity, Ghost, ChevronRight, Heart, Gift, FlaskConical, Syringe, Flower2, Wind, Tent, RefreshCw, Upload, Loader2, User, WifiOff } from 'lucide-react';
+import { Eye, Skull, Zap, Activity, Ghost, ChevronRight, Heart, Gift, FlaskConical, Syringe, Flower2, Wind, Tent, RefreshCw, Upload, Loader2, User, WifiOff, UserMinus, Swords, Box } from 'lucide-react';
 import { useImageUpload } from '@/hooks/useImageUpload';
 import { useGMRealtime } from '@/hooks/useGMRealtime';
 import { ARCHETYPES } from '@/constants';
@@ -68,9 +68,35 @@ const GMDashboard: React.FC = () => {
     const punishOrbit = (amount: number) => {
         if (!selectedPlayer) return;
         const current = selectedPlayer.character_data.orbit;
-        updatePlayer(selectedPlayerId!, { orbit: Math.min(10, current + amount) });
+        // Validação: Garante que a órbita nunca fique negativa
+        const newOrbit = Math.max(0, Math.min(10, current + amount));
+
+        updatePlayer(selectedPlayerId!, { orbit: newOrbit });
+
         if (roomId) {
             logEvent(roomId, "Mestre", `Alterou Órbita de ${selectedPlayer.character_data.name}: ${amount > 0 ? `+${amount}` : amount}`, 'alert');
+        }
+    };
+
+    const handleKickPlayer = async () => {
+        if (!selectedPlayer || !selectedPlayerId) return;
+
+        if (!confirm(`Deseja realmente EXPULSAR ${selectedPlayer.character_data.name} da sala? O personagem será deletado do banco de dados.`)) return;
+
+        try {
+            const { error } = await supabase
+                .from('characters')
+                .delete()
+                .eq('id', selectedPlayerId);
+
+            if (error) throw error;
+
+            alert("Vinculado expulso da realidade.");
+            setSelectedPlayerId(null);
+            refreshPlayers(); // Forçar atualização da lista
+        } catch (e) {
+            console.error("Erro ao expulsar:", e);
+            alert("Falha ao expulsar jogador.");
         }
     };
 
@@ -175,7 +201,7 @@ const GMDashboard: React.FC = () => {
                         return (
                             <div
                                 key={p.id}
-                                onClick={() => setSelectedPlayerId(p.id)}
+                                onClick={() => setSelectedPlayerId(selectedPlayerId === p.id ? null : p.id)}
                                 className={`relative p-5 border rounded-sm cursor-pointer transition-all duration-300 group overflow-hidden ${isSelected
                                     ? 'bg-stone-900 border-gold shadow-[0_0_15px_rgba(161,98,7,0.1)]'
                                     : 'bg-stone-950 border-stone-800 hover:border-stone-600'
@@ -307,10 +333,18 @@ const GMDashboard: React.FC = () => {
                         {selectedPlayer ? (
                             <div className="animate-in fade-in slide-in-from-right-4">
                                 <div className="mb-6 border-b border-stone-800 pb-4">
-                                    <h2 className="text-gold font-serif text-xl mb-1 flex items-center gap-2">
-                                        <Activity size={18} />
-                                        {selectedPlayer.character_data.name}
-                                    </h2>
+                                    <div className="flex justify-between items-center mb-1">
+                                        <h2 className="text-gold font-serif text-xl flex items-center gap-2">
+                                            <Activity size={18} />
+                                            {selectedPlayer.character_data.name}
+                                        </h2>
+                                        <button
+                                            onClick={handleKickPlayer}
+                                            className="text-[9px] text-red-500 hover:text-white border border-red-900/30 hover:bg-red-900 px-2 py-1 rounded transition-all uppercase font-bold flex items-center gap-1"
+                                        >
+                                            <UserMinus size={10} /> Expulsar
+                                        </button>
+                                    </div>
                                     <p className="text-stone-500 text-xs">Ações de Intervenção Divina</p>
                                 </div>
 
@@ -457,33 +491,28 @@ const GMDashboard: React.FC = () => {
                                         </div>
 
                                         {!isCustomLoot ? (
-                                            <div className="flex flex-col gap-2">
-                                                <select
-                                                    id="loot-select"
-                                                    className="bg-stone-900 border border-stone-700 text-stone-300 text-xs p-2 rounded outline-none focus:border-cyan-500"
-                                                >
-                                                    <option value="">-- Selecione um Item --</option>
-                                                    {GM_LOOT.map(item => (
-                                                        <option key={item.id} value={item.id}>
-                                                            {item.type === 'weapon' ? '⚔️' : item.type === 'consumable' ? '🧪' : '📦'} {item.name}
-                                                        </option>
-                                                    ))}
-                                                </select>
-
-                                                <button
-                                                    onClick={() => {
-                                                        const select = document.getElementById('loot-select') as HTMLSelectElement;
-                                                        const itemId = select.value;
-                                                        const item = GM_LOOT.find(i => i.id === itemId);
-                                                        if (item && selectedPlayerId) {
-                                                            giveLoot(selectedPlayerId, item);
-                                                            alert(`Enviado: ${item.name}`);
-                                                        }
-                                                    }}
-                                                    className="w-full bg-stone-800 hover:bg-cyan-900/50 text-cyan-500 border border-stone-700 hover:border-cyan-500 py-2 rounded text-xs font-bold uppercase transition-all"
-                                                >
-                                                    Enviar para Inventário
-                                                </button>
+                                            <div className="max-h-48 overflow-y-auto border border-stone-800 rounded bg-black/20 p-1 space-y-1 scrollbar-thin scrollbar-thumb-stone-800">
+                                                {GM_LOOT.map(item => (
+                                                    <button
+                                                        key={item.id}
+                                                        onClick={() => {
+                                                            if (selectedPlayerId) {
+                                                                giveLoot(selectedPlayerId, item);
+                                                                alert(`Enviado: ${item.name}`);
+                                                            }
+                                                        }}
+                                                        title={item.description}
+                                                        className="w-full flex items-center gap-3 p-2 hover:bg-stone-800 border border-transparent hover:border-stone-700 rounded transition-all group"
+                                                    >
+                                                        <div className="p-1.5 bg-stone-900 border border-stone-800 text-stone-500 group-hover:text-cyan-400">
+                                                            {item.type === 'weapon' ? <Swords size={12} /> : item.type === 'consumable' ? <FlaskConical size={12} /> : <Box size={12} />}
+                                                        </div>
+                                                        <div className="flex flex-col items-start leading-tight">
+                                                            <span className="text-[11px] font-bold text-stone-300 group-hover:text-white uppercase tracking-wider">{item.name}</span>
+                                                            <span className="text-[9px] text-stone-600 truncate max-w-[180px]">{item.description}</span>
+                                                        </div>
+                                                    </button>
+                                                ))}
                                             </div>
                                         ) : (
                                             <div className="flex flex-col gap-2 animate-in fade-in">
