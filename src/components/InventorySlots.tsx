@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Package, Plus, Trash2, Check, X, AlertTriangle } from 'lucide-react';
 import { useCharacter } from '@/contexts/CharacterContext';
 import { playSound } from '@/hooks/useAudio';
-import { InventorySlot } from '@/types';
+import { InventorySlot } from '@/types/index';
 
 export const InventorySlots: React.FC = () => {
     const { character, updateCharacter } = useCharacter();

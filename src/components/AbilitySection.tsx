@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Zap, Eye, Shield, Plus, X, Skull, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useCharacter } from '@/contexts/CharacterContext';
-import { CustomAbility, AbilityType } from '@/types';
+import { CustomAbility, AbilityType } from '@/types/index';
 import { ARCHETYPES } from '@/constants';
 
 export const AbilitySection: React.FC = () => {

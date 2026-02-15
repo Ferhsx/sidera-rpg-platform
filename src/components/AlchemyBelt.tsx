@@ -5,7 +5,7 @@ import {
     Flower2, Wind, Activity, Tent
 } from 'lucide-react';
 import { useCharacter } from '@/contexts/CharacterContext';
-import { Condition } from '@/types';
+import { Condition } from '@/types/index';
 
 const AlchemyBelt: React.FC = () => {
     const { character, updateCharacter, playSound } = useCharacter();

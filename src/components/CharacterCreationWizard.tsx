@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { User, Star, Activity, ArrowRight, Check, ChevronLeft, Shield, Zap, Skull, Brain } from 'lucide-react';
 import { ARCHETYPES } from '@/constants';
 import { useCharacter } from '@/contexts/CharacterContext';
-import { Attributes } from '@/types';
+import { Attributes } from '@/types/index';
 
 const CharacterCreationWizard: React.FC = () => {
     const { character, updateCharacter } = useCharacter();

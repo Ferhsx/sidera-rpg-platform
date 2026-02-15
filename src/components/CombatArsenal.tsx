@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sword, Shield, Crosshair, RefreshCw, AlertTriangle, Hammer, Trash2, Plus, X } from 'lucide-react';
-import { Weapon, WeaponCategory, WeaponStatus } from '@/types';
+import { Weapon, WeaponCategory, WeaponStatus } from '@/types/index';
 import { WEAPON_CATALOG } from '@/constants';
 import { useCharacter } from '@/contexts/CharacterContext';
 import { playSound } from '@/hooks/useAudio';

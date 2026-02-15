@@ -1,4 +1,4 @@
-import { Archetype, Pillar, Weapon } from "@/types";
+import { Archetype, Pillar, Weapon } from "@/types/index";
 
 
 export const WEAPON_CATALOG: Omit<Weapon, 'id' | 'status'>[] = [

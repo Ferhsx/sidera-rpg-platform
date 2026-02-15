@@ -1,7 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
-import { CharacterData, CustomAbility } from '@/types';
+import { CharacterData, CustomAbility } from '@/types/index';
 import { LootItem } from '@/constants/loot';
+import { CharacterService } from '@/services/character.service';
 
 // O formato que vem do Banco de Dados
 interface DBCharacter {
@@ -42,13 +43,13 @@ export const useGMRealtime = () => {
     const refreshPlayers = async () => {
         if (!roomId) return;
         setLoading(true);
-        const { data: chars } = await supabase
-            .from('characters')
-            .select('*')
-            .eq('room_id', roomId);
-
-        if (chars) {
-            setPlayers(chars as DBCharacter[]);
+        try {
+            const chars = await CharacterService.getByRoomId(roomId);
+            if (chars) {
+                setPlayers(chars as DBCharacter[]);
+            }
+        } catch (e) {
+            console.error(e);
         }
         setLoading(false);
     };
@@ -79,13 +80,13 @@ export const useGMRealtime = () => {
             setRoomId(rId);
 
             // B. Buscar estado inicial
-            const { data: initialChars } = await supabase
-                .from('characters')
-                .select('*')
-                .eq('room_id', rId);
-
-            if (initialChars) {
-                setPlayers(initialChars as DBCharacter[]);
+            try {
+                const initialChars = await CharacterService.getByRoomId(rId);
+                if (initialChars) {
+                    setPlayers(initialChars as DBCharacter[]);
+                }
+            } catch (e) {
+                console.error(e);
             }
             setLoading(false);
 
@@ -140,11 +141,8 @@ export const useGMRealtime = () => {
         // 2. Mesclar dados
         const updatedCharData = { ...target.character_data, ...newData };
 
-        // 3. Enviar para o banco (isso vai disparar o evento realtime de volta para a UI)
-        await supabase
-            .from('characters')
-            .update({ character_data: updatedCharData })
-            .eq('id', playerId);
+        // 3. Enviar para o banco
+        await CharacterService.save(playerId, updatedCharData);
     };
 
     // Função para dar item (Loot Remoto)
@@ -185,10 +183,7 @@ export const useGMRealtime = () => {
         }
 
         // 1. Atualizar Banco de Dados (Persistência)
-        await supabase
-            .from('characters')
-            .update({ character_data: charData })
-            .eq('id', playerId);
+        await CharacterService.save(playerId, charData);
 
         // 2. Enviar Notificação Visual (Broadcast)
         await sendBroadcast('loot_alert', {
@@ -220,10 +215,7 @@ export const useGMRealtime = () => {
         const updatedAbilities = [...(charData.customAbilities || []), newAbil];
 
         // 1. Update DB (Realtime Sync will handle the rest)
-        await supabase
-            .from('characters')
-            .update({ character_data: { ...charData, customAbilities: updatedAbilities } })
-            .eq('id', playerId);
+        await CharacterService.save(playerId, { ...charData, customAbilities: updatedAbilities });
 
         // 2. Log no Eco
         await supabase.from('game_logs').insert([{

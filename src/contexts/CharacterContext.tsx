@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { CharacterData, Condition } from '@/types';
+import { CharacterData, Condition } from '@/types/index';
 import { ARCHETYPES } from '@/constants';
 import { playSound } from '@/hooks/useAudio';
 import { supabase } from '@/lib/supabase';
+import { CharacterService } from '@/services/character.service';
 
 // Default initial state
 const INITIAL_CHARACTER: CharacterData = {
@@ -130,20 +131,11 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         if (!isLoading && dbInfo.charId) {
             setSaveStatus('saving');
             const timer = setTimeout(async () => {
-                const { error } = await supabase
-                    .from('characters')
-                    .update({
-                        character_data: character,
-                        updated_at: new Date()
-                    })
-                    .eq('id', dbInfo.charId);
-
-                if (error) {
-                    console.error("Erro ao salvar:", error);
-                    setSaveStatus('error');
-                } else {
+                try {
+                    await CharacterService.save(dbInfo.charId!, character);
                     setSaveStatus('saved');
-                    // console.log("Salvo.");
+                } catch (error) {
+                    setSaveStatus('error');
                 }
             }, 1000); // Debounce de 1s
 
@@ -218,10 +210,7 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     const resetCharacter = async () => {
         // Deletar do banco se estiver em uma sala
         if (dbInfo.charId) {
-            await supabase
-                .from('characters')
-                .delete()
-                .eq('id', dbInfo.charId);
+            await CharacterService.delete(dbInfo.charId);
         }
 
         setCharacter(INITIAL_CHARACTER);
@@ -272,10 +261,7 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     const leaveRoom = async () => {
         // 1. Se for jogador, desvincular no banco
         if (dbInfo.charId) {
-            await supabase
-                .from('characters')
-                .update({ room_id: null })
-                .eq('id', dbInfo.charId);
+            await CharacterService.leaveRoom(dbInfo.charId);
         }
 
         // 2. Limpar estado local

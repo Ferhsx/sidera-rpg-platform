@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertCircle, Skull, Activity, Eye, User, Zap, Droplet, Shield, Moon } from 'lucide-react';
-import { OrbitStage } from '@/types';
+import { OrbitStage } from '@/types/index';
 import { useCharacter } from '@/contexts/CharacterContext';
 import { playSound } from '@/hooks/useAudio';
 

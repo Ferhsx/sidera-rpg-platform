@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Trash2, Star, Dices, Swords, Volume2, VolumeX, Tent } from 'lucide-react';
 import { ARCHETYPES } from '@/constants';
-import { Attributes, Weapon } from '@/types';
+import { Attributes, Weapon } from '@/types/index';
 import DiceRoller from './DiceRoller';
 import OrbitWidget from './OrbitWidget';
 import { VitalityBar } from './VitalityBar';

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Dices, X, Zap, AlertTriangle, Sparkles, Skull } from 'lucide-react';
-import { OrbitStage } from '@/types';
+import { OrbitStage } from '@/types/index';
 import { useCharacter } from '@/contexts/CharacterContext';
 import { ARCHETYPES } from '@/constants';
 import { playSound, stopSound } from '@/hooks/useAudio';
