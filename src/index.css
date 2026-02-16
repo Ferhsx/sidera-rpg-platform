@@ -1,6 +1,20 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cinzel", serif;
+  --font-sans: "Inter", sans-serif;
+
+  --color-void: #0a0a0a;
+  --color-ash: #1c1917;
+  --color-blood: #450a0a;
+  --color-blood-bright: #7f1d1d;
+  --color-rust: #b45309;
+  --color-gold: #a16207;
+  --color-bone: #e5e5e5;
+  --color-faded: #a8a29e;
+
+  --background-image-cosmic-dust: radial-gradient(circle at center, rgba(120, 53, 15, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+}
 
 @layer base {
   body {

@@ -61,7 +61,7 @@ export interface Condition {
     description: string; // Ex: "-1 em Físico"
     type: ConditionType;
     durationInRounds?: number; // Se undefined, é permanente até ser removido
-    mechanic?: 'nausea' | 'invisible' | 'stimulated'; // Tags para automação
+    mechanic?: 'nausea' | 'invisible' | 'stimulated' | 'numb'; // Tags para automação
 }
 
 export interface Consumable {

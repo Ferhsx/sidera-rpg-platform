@@ -67,3 +67,6 @@ build/
 
 # Supabase Types 
 types/supabase.ts
+
+# txt files
+*.txt   
