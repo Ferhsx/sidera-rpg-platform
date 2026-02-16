@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Zap, Eye, Shield, Plus, X, Skull, BookOpen } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useCharacter } from '@/contexts/CharacterContext';
 import { CustomAbility, AbilityType } from '@/types/index';
 import { ARCHETYPES } from '@/constants';
+import { ASTRAL_POWERS } from '@/constants/astralPowers';
+import { logEvent } from '@/lib/logger';
 
 export const AbilitySection: React.FC = () => {
-    const { character, updateCharacter } = useCharacter();
+    const { character, updateCharacter, dbInfo } = useCharacter();
     const [isAdding, setIsAdding] = useState(false);
+    const [manifestFeedback, setManifestFeedback] = useState<string | null>(null);
 
     // State do Formulário
     const [newAbility, setNewAbility] = useState<Partial<CustomAbility>>({
@@ -18,6 +21,41 @@ export const AbilitySection: React.FC = () => {
     });
 
     const archetype = ARCHETYPES.find(a => a.id === character.archetypeId);
+    const selectedAstralPower = ASTRAL_POWERS.find(p => p.id === character.astralPowerId);
+
+    // Get current tier based on orbit
+    const getCurrentTier = useCallback(() => {
+        if (!selectedAstralPower) return null;
+        if (character.orbit >= 9) return { ...selectedAstralPower.tiers.high, level: 'HIGH' };
+        if (character.orbit >= 5) return { ...selectedAstralPower.tiers.mid, level: 'MID' };
+        return { ...selectedAstralPower.tiers.low, level: 'LOW' };
+    }, [selectedAstralPower, character.orbit]);
+
+    const currentTier = getCurrentTier();
+
+    const handleManifest = useCallback(() => {
+        if (!selectedAstralPower) return;
+
+        // Calculate cost (e.g. "+1 Órbita" -> 1)
+        const costMatch = selectedAstralPower.cost.match(/\d+/);
+        const costValue = costMatch ? parseInt(costMatch[0]) : 1;
+
+        const newOrbit = Math.min(10, character.orbit + costValue);
+        updateCharacter({ orbit: newOrbit });
+
+        setManifestFeedback(selectedAstralPower.name);
+        setTimeout(() => setManifestFeedback(null), 3000);
+
+        if (dbInfo?.roomId) {
+            logEvent(dbInfo.roomId, character.name, `Manifestou: ${selectedAstralPower.name} (${getCurrentTier()?.range})`, 'combat');
+        }
+    }, [selectedAstralPower, character.orbit, character.name, updateCharacter, dbInfo?.roomId, getCurrentTier]);
+
+    useEffect(() => {
+        const handleTrigger = () => handleManifest();
+        window.addEventListener('trigger-manifest', handleTrigger);
+        return () => window.removeEventListener('trigger-manifest', handleTrigger);
+    }, [handleManifest]);
 
     const handleAdd = () => {
         if (!newAbility.name || !newAbility.description) return;
@@ -81,10 +119,49 @@ export const AbilitySection: React.FC = () => {
                             <p className="text-xs text-stone-400 leading-relaxed">{archetype.passive.split(':')[1] || archetype.passive}</p>
                         </div>
 
-                        <div className="bg-stone-900/40 border border-gold/30 p-4 rounded-sm relative group">
-                            <div className="absolute top-2 right-2 text-[9px] border border-gold/30 px-1 rounded text-gold uppercase">Manifestação</div>
-                            <h4 className="font-serif font-bold text-gold mb-1 flex items-center gap-2"><Zap size={12} /> Poder do Astro</h4>
-                            <p className="text-xs text-stone-400 leading-relaxed">{archetype.manifestation}</p>
+                        <div className={`
+                            p-4 rounded-sm relative group transition-all duration-500 border
+                            ${currentTier?.level === 'HIGH' ? 'bg-red-950/20 border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.1)]' :
+                                currentTier?.level === 'MID' ? 'bg-gold/5 border-gold shadow-[0_0_15px_rgba(212,163,115,0.1)]' :
+                                    'bg-stone-900/40 border-gold/30'}
+                        `}>
+                            <div className="flex justify-between items-start mb-2">
+                                <div className={`text-[9px] border px-1 rounded uppercase font-bold tracking-tighter
+                                    ${currentTier?.level === 'HIGH' ? 'border-red-500 text-red-500' :
+                                        currentTier?.level === 'MID' ? 'border-gold text-gold' :
+                                            'border-gold/30 text-gold/60'}
+                                `}>
+                                    Manifestação ({currentTier?.range})
+                                </div>
+                                <button
+                                    onClick={handleManifest}
+                                    className="bg-gold hover:bg-white text-black text-[9px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-tighter transition-colors"
+                                >
+                                    Manifestar ({selectedAstralPower?.cost})
+                                </button>
+                            </div>
+
+                            <h4 className="font-serif font-bold text-bone mb-1 flex items-center gap-2">
+                                <Zap size={12} className="text-gold" /> {selectedAstralPower ? selectedAstralPower.name : 'Poder do Astro'}
+                            </h4>
+                            <p className="text-xs text-stone-300 leading-relaxed min-h-[3em]">
+                                {currentTier ? currentTier.effect : (selectedAstralPower ? selectedAstralPower.description : archetype.manifestation)}
+                            </p>
+
+                            <AnimatePresence>
+                                {manifestFeedback && (
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 1.2 }}
+                                        className="absolute inset-0 bg-gold/10 backdrop-blur-[2px] flex flex-col items-center justify-center text-center p-4 border border-gold rounded-sm z-10"
+                                    >
+                                        <Zap size={24} className="text-gold mb-2 animate-pulse" />
+                                        <div className="text-gold font-serif font-bold text-sm uppercase tracking-[0.2em]">{manifestFeedback}</div>
+                                        <div className="text-white text-[9px] mt-1 font-mono uppercase">Vínculo Estelar Expandido</div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </div>
 
                         <div className="bg-stone-900/40 border border-red-900/30 p-4 rounded-sm relative group col-span-1 md:col-span-2">

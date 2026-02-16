@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Trash2, Star, Dices, Swords, Volume2, VolumeX, Tent } from 'lucide-react';
 import { ARCHETYPES } from '@/constants';
+import { ASTRAL_POWERS } from '@/constants/astralPowers';
 import { Attributes, Weapon } from '@/types/index';
 import DiceRoller from './DiceRoller';
 import OrbitWidget from './OrbitWidget';
@@ -24,6 +25,7 @@ import { CampModal } from './CampModal';
 import { SaveIndicator } from './SaveIndicator';
 import { AvatarSelector } from './AvatarSelector';
 import { AbilitySection } from './AbilitySection';
+import { LoreTab } from './LoreTab';
 
 // AttributeBox component remains the same ...
 const AttributeBox: React.FC<{
@@ -92,7 +94,7 @@ const AttributeBox: React.FC<{
 };
 
 const CharacterSheet: React.FC = () => {
-  const { character: char, updateCharacter, resetCharacter, isLoading, dbInfo, leaveRoom } = useCharacter();
+  const { character: char, updateCharacter, resetCharacter, isLoading, dbInfo, leaveRoom, setView } = useCharacter();
   const [rollingAttr, setRollingAttr] = useState<{
     name: string,
     value: number,
@@ -121,6 +123,7 @@ const CharacterSheet: React.FC = () => {
   };
 
   const selectedArchetype = ARCHETYPES.find(a => a.id === char.archetypeId);
+  const selectedAstralPower = ASTRAL_POWERS.find(p => p.id === char.astralPowerId);
 
   // Determine Health Status
   const isDying = char.currentHp <= 0;
@@ -165,6 +168,8 @@ const CharacterSheet: React.FC = () => {
       weaponId: weapon.id
     });
   };
+
+  const [activeTab, setActiveTab] = useState<'stats' | 'lore'>('stats');
 
   if (isLoading) return <div className="text-center p-20 text-rust animate-pulse">Invocando Ficha...</div>;
 
@@ -231,13 +236,17 @@ const CharacterSheet: React.FC = () => {
             </div>
             <div className="flex flex-col">
               <label className="text-xs text-stone-500 uppercase tracking-widest mb-1">Antecedente / Profissão</label>
-              <input
-                type="text"
-                value={char.background}
-                onChange={(e) => updateCharacter({ background: e.target.value })}
-                placeholder="Ex: Mercenário, Cultista Arrependido..."
-                className="bg-transparent border-b border-stone-800 text-stone-400 focus:outline-none focus:border-stone-600 transition-colors w-full"
-              />
+              {char.backgroundId ? (
+                <div className="text-stone-300 font-serif text-lg">{char.background}</div>
+              ) : (
+                <input
+                  type="text"
+                  value={char.background}
+                  onChange={(e) => updateCharacter({ background: e.target.value })}
+                  placeholder="Ex: Mercenário, Cultista Arrependido..."
+                  className="bg-transparent border-b border-stone-800 text-stone-400 focus:outline-none focus:border-stone-600 transition-colors w-full"
+                />
+              )}
             </div>
           </div>
         </div>
@@ -246,181 +255,209 @@ const CharacterSheet: React.FC = () => {
           <label className="text-xs text-rust uppercase tracking-widest flex items-center gap-2">
             <Star size={12} /> Signo / Arquétipo
           </label>
-          <select
-            value={char.archetypeId}
-            onChange={(e) => updateCharacter({ archetypeId: e.target.value })}
-            className="bg-void border border-stone-700 text-bone p-2 text-sm focus:border-rust outline-none font-serif"
-          >
-            <option value="">-- Escolha um Destino --</option>
-            {ARCHETYPES.map(a => (
-              <option key={a.id} value={a.id}>{a.name} ({a.planet})</option>
-            ))}
-          </select>
+          {char.backgroundId ? (
+            <div className="text-bone font-serif text-lg">{selectedArchetype?.name} ({selectedArchetype?.planet})</div>
+          ) : (
+            <select
+              value={char.archetypeId}
+              onChange={(e) => updateCharacter({ archetypeId: e.target.value })}
+              className="bg-void border border-stone-700 text-bone p-2 text-sm focus:border-rust outline-none font-serif"
+            >
+              <option value="">-- Escolha um Destino --</option>
+              {ARCHETYPES.map(a => (
+                <option key={a.id} value={a.id}>{a.name} ({a.planet})</option>
+              ))}
+            </select>
+          )}
           {selectedArchetype && (
             <div className="text-xs text-stone-500 mt-2 font-mono leading-tight">
-              <span className="text-gold block mb-1">Bônus: {selectedArchetype.type} (+{selectedArchetype.bonusHp} PV)</span>
-              {selectedArchetype.passive}
+              <span className="text-gold block mb-1">
+                {selectedAstralPower ? `Manifestação: ${selectedAstralPower.name}` : `Bônus: ${selectedArchetype.type} (+${selectedArchetype.bonusHp} PV)`}
+              </span>
+              {selectedAstralPower ? selectedAstralPower.description : selectedArchetype.passive}
             </div>
           )}
         </div>
       </header>
 
-      {/* Main Layout Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-        {/* Left Column: Attributes & Vitals */}
-        <div className="lg:col-span-2 space-y-8">
-
-          {/* Attributes */}
-          <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <AttributeBox
-              label="Ferro"
-              value={char.attributes.ferro}
-              onChange={(v) => updateAttribute('ferro', v)}
-              onRoll={() => setRollingAttr({ name: 'Ferro', value: char.attributes.ferro })}
-              description="Força, Violência, Resiliência"
-              bonus={(char.orbit >= 5 && selectedArchetype?.primaryAttribute === 'ferro') ? 1 : 0}
-            />
-            <AttributeBox
-              label="Mercúrio"
-              value={char.attributes.mercurio}
-              onChange={(v) => updateAttribute('mercurio', v)}
-              onRoll={() => setRollingAttr({ name: 'Mercúrio', value: char.attributes.mercurio })}
-              description="Agilidade, Furtividade, Velocidade"
-              bonus={(char.orbit >= 5 && selectedArchetype?.primaryAttribute === 'mercurio') ? 1 : 0}
-            />
-            <AttributeBox
-              label="Enxofre"
-              value={char.attributes.enxofre}
-              onChange={(v) => updateAttribute('enxofre', v)}
-              onRoll={() => setRollingAttr({ name: 'Enxofre', value: char.attributes.enxofre })}
-              description="Tecnologia, Explosivos, Mecânica"
-              bonus={(char.orbit >= 5 && selectedArchetype?.primaryAttribute === 'enxofre') ? 1 : 0}
-            />
-            <AttributeBox
-              label="Sal"
-              value={char.attributes.sal}
-              onChange={(v) => updateAttribute('sal', v)}
-              onRoll={() => setRollingAttr({ name: 'Sal', value: char.attributes.sal })}
-              description="Vontade, Ocultismo, Empatia"
-              bonus={(char.orbit >= 5 && selectedArchetype?.primaryAttribute === 'sal') ? 1 : 0}
-            />
-
-            {/* Validation */}
-            <div className="col-span-2 md:col-span-4 mt-2 flex justify-center">
-              {(() => {
-                const vals = (Object.values(char.attributes) as number[]).sort((a, b) => b - a);
-                const standardArray = JSON.stringify([2, 1, 0, -1]);
-                const tradeArray = JSON.stringify([3, 1, 0, -2]);
-                const currentStr = JSON.stringify(vals);
-
-                let statusText = "";
-                let statusColor = "";
-
-                if (currentStr === standardArray) {
-                  statusText = "VÁLIDO (Array Padrão)";
-                  statusColor = "border-green-800 text-green-500 bg-green-900/10";
-                } else if (currentStr === tradeArray) {
-                  statusText = "VÁLIDO (Regra de Troca: +3 / -2)";
-                  statusColor = "border-green-800 text-green-500 bg-green-900/10";
-                } else {
-                  const points = vals.reduce((a, b) => a + b, 0);
-                  statusText = `CUSTOMIZADO / INVÁLIDO (Soma: ${points})`;
-                  statusColor = "border-red-900 text-red-500 bg-red-900/10";
-                }
-
-                return (
-                  <div className={`text-xs font-mono border px-3 py-1 rounded ${statusColor}`}>
-                    STATUS: {statusText}
-                  </div>
-                );
-              })()}
-            </div>
-          </section>
-
-          {/* Memórias & Mutações */}
-          <section className="bg-stone-900/10 border-artifact p-6">
-            <AbilitySection />
-          </section>
-
-          {/* Arsenal & Combat */}
-          <CombatArsenal onAttack={handleAttack} />
-
-          {/* Vitals & Orbit */}
-          <section className="bg-stone-900/10 border-artifact p-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div className="w-full">
-              <VitalityBar
-                current={char.currentHp}
-                max={char.maxHp}
-                onChange={(val) => updateCharacter({ currentHp: val })}
-              />
-              <div className="mt-4 border-t border-stone-800/50 pt-4">
-                <ArmorControl />
-              </div>
-              <div className="mt-4 border-t border-stone-800/50 pt-4">
-                <AlchemyBelt />
-              </div>
-            </div>
-            <div>
-              <StarWhisper />
-              <OrbitWidget
-                orbit={char.orbit}
-                onChange={(val) => updateCharacter({ orbit: Math.min(Math.max(0, val), 10) })}
-                mini={true}
-              />
-              {char.currentHp <= 0 && <DeathSaveSection />}
-            </div>
-          </section>
-
-        </div>
-
-        {/* Right Column: Inventory & Notes */}
-        <div className="flex flex-col gap-6">
-
-          {/* Money / Economy */}
-          <div className="bg-stone-900/40 border-artifact p-4 flex items-center justify-between">
-            <div className="flex flex-col">
-              <span className="text-rust text-xs uppercase tracking-widest font-bold">Limalhas de Prata</span>
-              <span className="text-[10px] text-stone-500">Recursos & Troca</span>
-            </div>
-
-            <div className="flex items-center gap-3 bg-black/40 border border-stone-800 rounded p-1">
-              <button
-                onClick={() => updateCharacter({ silver: Math.max(0, (char.silver || 0) - 1) })}
-                className="w-8 h-8 flex items-center justify-center text-stone-500 hover:text-white hover:bg-white/5 rounded transition-colors"
-              >
-                -
-              </button>
-              <div className="flex flex-col items-center w-12">
-                <span className="text-xl font-serif font-bold text-bone">{char.silver || 0}</span>
-                <span className="text-[9px] text-stone-600">LP</span>
-              </div>
-              <button
-                onClick={() => updateCharacter({ silver: (char.silver || 0) + 1 })}
-                className="w-8 h-8 flex items-center justify-center text-stone-500 hover:text-white hover:bg-white/5 rounded transition-colors"
-              >
-                +
-              </button>
-            </div>
-          </div>
-
-          <div className="bg-ash/20 border-artifact p-4 flex-1 flex flex-col">
-            <InventorySlots />
-          </div>
-
-          <div className="bg-ash/20 border border-stone-800 p-4 h-48">
-            <label className="text-xs text-stone-500 uppercase tracking-widest mb-2 block">Cicatrizes & Notas</label>
-            <textarea
-              value={char.notes}
-              onChange={(e) => updateCharacter({ notes: e.target.value })}
-              className="w-full h-full bg-void/50 border-none p-2 text-sm text-stone-400 focus:outline-none resize-none italic"
-              placeholder="O que você perdeu? Quem você matou?"
-            />
-          </div>
-
-          <GameLogs roomId={dbInfo.roomId || null} height="h-32" />
-        </div>
+      {/* TABS NAVIGATION */}
+      <div className="flex gap-8 border-b border-stone-800">
+        <button
+          onClick={() => setActiveTab('stats')}
+          className={`pb-4 text-xs font-bold uppercase tracking-widest transition-all ${activeTab === 'stats' ? 'text-rust border-b-2 border-rust' : 'text-stone-600 hover:text-stone-400'}`}
+        >
+          Ficha Técnica
+        </button>
+        <button
+          onClick={() => setActiveTab('lore')}
+          className={`pb-4 text-xs font-bold uppercase tracking-widest transition-all ${activeTab === 'lore' ? 'text-rust border-b-2 border-rust' : 'text-stone-600 hover:text-stone-400'}`}
+        >
+          Propósito & Lore
+        </button>
       </div>
+
+      {activeTab === 'lore' ? (
+        <LoreTab />
+      ) : (
+        <>
+          {/* Main Layout Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            {/* Left Column: Attributes & Vitals */}
+            <div className="lg:col-span-2 space-y-8">
+
+              {/* Attributes */}
+              <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <AttributeBox
+                  label="Ferro"
+                  value={char.attributes.ferro}
+                  onChange={(v) => updateAttribute('ferro', v)}
+                  onRoll={() => setRollingAttr({ name: 'Ferro', value: char.attributes.ferro })}
+                  description="Força, Violência, Resiliência"
+                  bonus={(char.orbit >= 5 && selectedArchetype?.primaryAttribute === 'ferro') ? 1 : 0}
+                />
+                <AttributeBox
+                  label="Mercúrio"
+                  value={char.attributes.mercurio}
+                  onChange={(v) => updateAttribute('mercurio', v)}
+                  onRoll={() => setRollingAttr({ name: 'Mercúrio', value: char.attributes.mercurio })}
+                  description="Agilidade, Furtividade, Velocidade"
+                  bonus={(char.orbit >= 5 && selectedArchetype?.primaryAttribute === 'mercurio') ? 1 : 0}
+                />
+                <AttributeBox
+                  label="Enxofre"
+                  value={char.attributes.enxofre}
+                  onChange={(v) => updateAttribute('enxofre', v)}
+                  onRoll={() => setRollingAttr({ name: 'Enxofre', value: char.attributes.enxofre })}
+                  description="Tecnologia, Explosivos, Mecânica"
+                  bonus={(char.orbit >= 5 && selectedArchetype?.primaryAttribute === 'enxofre') ? 1 : 0}
+                />
+                <AttributeBox
+                  label="Sal"
+                  value={char.attributes.sal}
+                  onChange={(v) => updateAttribute('sal', v)}
+                  onRoll={() => setRollingAttr({ name: 'Sal', value: char.attributes.sal })}
+                  description="Vontade, Ocultismo, Empatia"
+                  bonus={(char.orbit >= 5 && selectedArchetype?.primaryAttribute === 'sal') ? 1 : 0}
+                />
+
+                {/* Validation */}
+                <div className="col-span-2 md:col-span-4 mt-2 flex justify-center">
+                  {(() => {
+                    const vals = (Object.values(char.attributes) as number[]).sort((a, b) => b - a);
+                    const standardArray = JSON.stringify([2, 1, 0, -1]);
+                    const tradeArray = JSON.stringify([3, 1, 0, -2]);
+                    const currentStr = JSON.stringify(vals);
+
+                    let statusText = "";
+                    let statusColor = "";
+
+                    if (currentStr === standardArray) {
+                      statusText = "VÁLIDO (Array Padrão)";
+                      statusColor = "border-green-800 text-green-500 bg-green-900/10";
+                    } else if (currentStr === tradeArray) {
+                      statusText = "VÁLIDO (Regra de Troca: +3 / -2)";
+                      statusColor = "border-green-800 text-green-500 bg-green-900/10";
+                    } else {
+                      const points = vals.reduce((a, b) => a + b, 0);
+                      statusText = `CUSTOMIZADO / INVÁLIDO (Soma: ${points})`;
+                      statusColor = "border-red-900 text-red-500 bg-red-900/10";
+                    }
+
+                    return (
+                      <div className={`text-xs font-mono border px-3 py-1 rounded ${statusColor}`}>
+                        STATUS: {statusText}
+                      </div>
+                    );
+                  })()}
+                </div>
+              </section>
+
+              {/* Memórias & Mutações */}
+              <section className="bg-stone-900/10 border-artifact p-6">
+                <AbilitySection />
+              </section>
+
+              {/* Arsenal & Combat */}
+              <CombatArsenal onAttack={handleAttack} />
+
+              {/* Vitals & Orbit */}
+              <section className="bg-stone-900/10 border-artifact p-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="w-full">
+                  <VitalityBar
+                    current={char.currentHp}
+                    max={char.maxHp}
+                    onChange={(val) => updateCharacter({ currentHp: val })}
+                  />
+                  <div className="mt-4 border-t border-stone-800/50 pt-4">
+                    <ArmorControl />
+                  </div>
+                  <div className="mt-4 border-t border-stone-800/50 pt-4">
+                    <AlchemyBelt />
+                  </div>
+                </div>
+                <div>
+                  <StarWhisper />
+                  <OrbitWidget
+                    orbit={char.orbit}
+                    onChange={(val) => updateCharacter({ orbit: Math.min(Math.max(0, val), 10) })}
+                    mini={true}
+                  />
+                  {char.currentHp <= 0 && <DeathSaveSection />}
+                </div>
+              </section>
+
+            </div>
+
+            {/* Right Column: Inventory & Notes */}
+            <div className="flex flex-col gap-6">
+
+              {/* Money / Economy */}
+              <div className="bg-stone-900/40 border-artifact p-4 flex items-center justify-between">
+                <div className="flex flex-col">
+                  <span className="text-rust text-xs uppercase tracking-widest font-bold">Limalhas de Prata</span>
+                  <span className="text-[10px] text-stone-500">Recursos & Troca</span>
+                </div>
+
+                <div className="flex items-center gap-3 bg-black/40 border border-stone-800 rounded p-1">
+                  <button
+                    onClick={() => updateCharacter({ silver: Math.max(0, (char.silver || 0) - 1) })}
+                    className="w-8 h-8 flex items-center justify-center text-stone-500 hover:text-white hover:bg-white/5 rounded transition-colors"
+                  >
+                    -
+                  </button>
+                  <div className="flex flex-col items-center w-12">
+                    <span className="text-xl font-serif font-bold text-bone">{char.silver || 0}</span>
+                    <span className="text-[9px] text-stone-600">LP</span>
+                  </div>
+                  <button
+                    onClick={() => updateCharacter({ silver: (char.silver || 0) + 1 })}
+                    className="w-8 h-8 flex items-center justify-center text-stone-500 hover:text-white hover:bg-white/5 rounded transition-colors"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div className="bg-ash/20 border-artifact p-4 flex-1 flex flex-col">
+                <InventorySlots />
+              </div>
+
+              <div className="bg-ash/20 border border-stone-800 p-4 h-48">
+                <label className="text-xs text-stone-500 uppercase tracking-widest mb-2 block">Cicatrizes & Notas</label>
+                <textarea
+                  value={char.notes}
+                  onChange={(e) => updateCharacter({ notes: e.target.value })}
+                  className="w-full h-full bg-void/50 border-none p-2 text-sm text-stone-400 focus:outline-none resize-none italic"
+                  placeholder="O que você perdeu? Quem você matou?"
+                />
+              </div>
+
+              <GameLogs roomId={dbInfo.roomId || null} height="h-32" />
+            </div>
+          </div>
+        </>
+      )}
 
 
 
@@ -430,11 +467,22 @@ const CharacterSheet: React.FC = () => {
           <SaveIndicator />
           <div className="h-4 w-px bg-stone-800 mx-2"></div>
 
+          {/* BOTÃO PARA VOLTAR A SELEÇÃO */}
+          {!dbInfo.roomId && (
+            <button
+              onClick={() => setView('selection')}
+              className="flex items-center gap-2 text-stone-500 hover:text-white transition-colors text-xs uppercase tracking-widest"
+            >
+              <div className="rotate-180">➜</div> Trocar Personagem
+            </button>
+          )}
+
           {dbInfo.roomId && (
             <button
               onClick={() => {
                 if (confirm("Deseja sair da sala? Seu personagem será mantido, mas você não estará mais visível para o Mestre.")) {
                   leaveRoom();
+                  setView('selection'); // Voltar para seleção ao sair da sala
                 }
               }}
               className="flex items-center gap-2 text-stone-500 hover:text-white transition-colors text-xs uppercase tracking-widest"

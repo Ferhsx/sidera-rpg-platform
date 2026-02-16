@@ -24,7 +24,6 @@ export const LootNotification: React.FC = () => {
             { event: 'loot_alert' },
             (envelope) => {
                 const data = envelope.payload || envelope;
-                console.log("🎁 Alerta de Loot recebido:", data);
                 // Verifica se é pra mim
                 if (data && data.targetId === dbInfo.charId) {
                     setLoot(data);
@@ -33,7 +32,6 @@ export const LootNotification: React.FC = () => {
                 }
             }
         ).subscribe((status) => {
-            console.log(`📡 Status Notificador de Itens [${dbInfo.roomId}]:`, status);
         });
 
         return () => { supabase.removeChannel(channel); };

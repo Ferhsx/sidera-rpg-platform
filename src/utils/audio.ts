@@ -52,7 +52,6 @@ const getAudio = (path: string): HTMLAudioElement | null => {
         audioCache.set(path, audio);
         return audio;
     } catch (e) {
-        console.warn(`[Audio] Could not load: ${path}`);
         return null;
     }
 };
@@ -125,7 +124,6 @@ export const startAmbient = (soundKey: keyof typeof SOUND_PATHS, volume?: number
         ambientAudio.volume = (volume ?? 1) * masterVolume * ambientVolume;
         ambientAudio.play().catch(() => { });
     } catch (e) {
-        console.warn(`[Audio] Could not start ambient: ${path}`);
     }
 };
 

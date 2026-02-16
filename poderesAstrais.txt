@@ -1,0 +1,271 @@
+I. O SOL (O Soberano)
+Fogo, Verdade, Autoridade e Revelação.
+1. Aura da Verdade (Social/Revelação)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você emite uma luz dourada e opressora. Mentiras queimam a língua de quem as profere.
+A Escala:
+Órbita 1-4: A luz ilumina 10m. Você ganha Vantagem em testes de Sal (Intimidação) e percebe se alguém está mentindo diretamente para você.
+Órbita 5-8: A luz cega. Inimigos olhando para você têm Desvantagem em ataques. Ilusões (como as da Lua) são dissipadas instantaneamente no raio de 10m.
+Órbita 9-10: "O Sol da Meia-Noite". A luz se torna física. Todos num raio de 20m devem fazer um teste de Sal ou se ajoelharão/renderão imediatamente (exceto Aberrações, que sofrem 1d6 de dano por turno).
+2. Olhar Febril (Dano Direto)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você dispara um feixe de calor concentrado pelos olhos ou boca.
+A Escala:
+Órbita 1-4: Você atira 1d6 de Dano de Fogo em um alvo a até 10 metros. Ignora 1 RD de armaduras normais.
+Órbita 5-8: O feixe se bifurca ou se espalha num cone de 3m. Causa 1d6+2 Dano de Fogo e pega fogo em roupas/cabelos.
+Órbita 9-10: "Erupção Solar". O feixe se torna um laser contínuo. Escolha uma linha de 30 metros. Tudo nela toma 10 de Dano direto e derrete até rocha. (Você perde a visão por 1 hora após usar).
+3. Coroa de Chamas (Defesa)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Seu corpo literalmente entra em combustão, mas você não sente dor.
+A Escala:
+Órbita 1-4: Tochas não são necessárias. Qualquer ataque corpo-a-corpo contra você causa 1 Dano de fogo de volta ao atacante.
+Órbita 5-8: Você ganha +2 RD contra frio e físico (o calor empurra lâminas). Atacantes sofrem 1d4 de Dano.
+Órbita 9-10: Você vira uma pira humana. Tudo a 3m de você toma 1d6 de dano automático no início do seu turno. Você não pode usar armas de madeira (elas queimam).
+4. Veredito Real (Suporte/Buff)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Sua voz ecoa como um trovão divino, inspirando ou ordenando.
+A Escala:
+Órbita 1-4: Você dá Vantagem no próximo teste de Sal ou Ferro para um aliado que possa te ouvir.
+Órbita 5-8: Você comanda um inimigo fraco (Bandido, Lobo) a "PARAR". Ele perde a próxima ação se falhar em um teste de Sal.
+Órbita 9-10: "De Joelhos!". Todos os inimigos num raio de 10m ficam "Caídos/Derrubados" automaticamente pela pressão da sua voz.
+II. A LUA (O Fantasma)
+Invisibilidade, Gravidade, Loucura e Reflexo.
+1. Mimetismo de Sombra (Stealth/Defesa)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você dobra a luz ao seu redor, tornando-se translúcido ou invisível.
+A Escala:
+Órbita 1-4: Você se torna invisível. Se atacar ou tomar dano, a invisibilidade quebra.
+Órbita 5-8: A invisibilidade persiste mesmo após um ataque (dura 1d4 turnos). Você ganha Desvantagem para ser acertado.
+Órbita 9-10: Você não existe mais neste plano por 1 turno. Imune a tudo, mas não pode interagir com nada físico.
+2. Espelho da Loucura (Controle Mental)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você projeta alucinações na mente de um alvo.
+A Escala:
+Órbita 1-4: Você cria um som ou imagem falsa que distrai um guarda/inimigo (perde o turno de movimento).
+Órbita 5-8: O alvo vê seu maior medo. Ele foge de você por 1d4 turnos ou ataca o aliado mais próximo dele em pânico.
+Órbita 9-10: "Pesadelo Coletivo". Todos os inimigos na sala devem fazer um teste de Enxofre. Se falharem, caem no chão gritando e rasgando os próprios olhos por 1 turno.
+3. Passo Lunar (Mobilidade)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você altera a gravidade pessoal para flutuar ou andar em paredes.
+A Escala:
+Órbita 1-4: Você pode saltar o triplo da distância e cair de qualquer altura sem dano (pena).
+Órbita 5-8: Você pode andar nas paredes e tetos como se fosse chão normal por 1 minuto.
+Órbita 9-10: Voo real. Você levita livremente por 1 cena. Se a órbita cair, você despenca.
+4. Lâmina de Prata (Dano/Combate)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Sua arma ou mãos brilham com luz prateada fria.
+A Escala:
+Órbita 1-4: Sua arma conta como "Prata" e "Mágica" (fere fantasmas e licantropos). Adiciona +1 Dano.
+Órbita 5-8: O toque da arma causa "Frio". Se acertar, o inimigo tem -2 em movimentos no próximo turno.
+Órbita 9-10: O golpe atravessa matéria. Ignora qualquer Armadura ou RD do alvo.
+III. MARTE (O Carniceiro)
+Violência, Adrenalina, Metal e Guerra.
+1. Fúria Cinética (Dano Explosivo)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você canaliza raiva pura em um golpe devastador.
+A Escala:
+Órbita 1-4: Adicione +1d6 ao dano do seu próximo ataque corpo-a-corpo.
+Órbita 5-8: Seu ataque atinge todos os inimigos adjacentes a você (Dano da arma em área ao seu redor).
+Órbita 9-10: "Massacre". Você faz 3 ataques completos em uma única ação contra alvos diferentes. Depois, sua arma quebra.
+2. Adrenalina de Ferro (Sobrevivência)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você ignora a dor e a morte temporariamente.
+A Escala:
+Órbita 1-4: Ganhe 1d6 PV Temporários (somem ao fim da cena).
+Órbita 5-8: Você ignora a condição "Moribundo" ou "Inconsciente" por 1d4 turnos. Pode lutar com 0 PV.
+Órbita 9-10: Você se torna imortal por 1 turno. Nenhum dano reduz seu PV abaixo de 1. No turno seguinte, você cai exausto.
+3. Arsenal de Sangue (Criação de Itens)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você arranca um pedaço de metal próximo (ou do próprio sangue) e molda uma arma.
+A Escala:
+Órbita 1-4: Cria uma Adaga ou Lança improvisada na sua mão instantaneamente.
+Órbita 5-8: A arma vibra. Ela tem +2 de Dano e conta como "Pesada" mesmo sendo leve.
+Órbita 9-10: Você magnetiza as armas dos inimigos. Todos num raio de 10m devem fazer teste de Ferro ou têm suas armas arrancadas das mãos, voando até você.
+4. Grito de Guerra (Debuff/Controle)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Um rugido que paralisa presas.
+A Escala:
+Órbita 1-4: Um inimigo alvo fica "Abalado" (Desvantagem no próximo ataque dele).
+Órbita 5-8: Inimigos em cone de 5m devem fugir ou atacar com Desvantagem por 1 turno.
+Órbita 9-10: O som estoura tímpanos. Inimigos num raio de 10m ficam Surdos e Atordoados (perdem a ação).
+IV. TERRA (A Fortaleza/Tellus)
+Rocha, Peso, Proteção e Magnetismo.
+1. Pele de Basalto (Defesa Absoluta)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Sua pele racha e endurece como pedra.
+A Escala:
+Órbita 1-4: Você ganha +2 RD (Redução de Dano) passiva por 1 minuto. Sua velocidade cai pela metade.
+Órbita 5-8: Você ganha +4 RD. Você não pode correr, apenas andar. Flechas ricocheteiam sem causar dano.
+Órbita 9-10: "A Estátua". Você se torna imune a dano físico por 1 turno, mas não pode se mover ou atacar. Apenas bloquear portas ou proteger aliados.
+2. Ancorar/Terremoto (Controle de Área)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você manipula o chão sob seus pés.
+A Escala:
+Órbita 1-4: Você cria terreno difícil num raio de 3m. Ninguém pode correr perto de você.
+Órbita 5-8: Derruba todos os inimigos num raio de 5m (Teste de Mercúrio para evitar).
+Órbita 9-10: Abre uma fenda no chão. Um alvo deve passar num teste de Mercúrio ou cair num buraco de 3m de profundidade que se fecha (esmagando ou prendendo).
+3. Muralha Viva (Criação/Barreira)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você ergue rocha ou terra para criar cobertura.
+A Escala:
+Órbita 1-4: Ergue uma mureta de pedra (cobertura média) que dura 1 cena.
+Órbita 5-8: Prende um inimigo em algemas de pedra. Ele está "Imobilizado" até quebrar a pedra (Força).
+Órbita 9-10: Ergue um domo de pedra impenetrável ao redor do grupo. Nada entra ou sai até você desmaiar.
+4. Sopro de Poeira (Debuff/Cegueira)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você expele uma nuvem de areia e detritos.
+A Escala:
+Órbita 1-4: Cria uma cortina de fumaça de 3m. Visão bloqueada.
+Órbita 5-8: A poeira entra nos pulmões. Inimigos na área sofrem 1d4 dano e tosse violenta (Desvantagem em tudo).
+Órbita 9-10: Tempestade de areia localizada. Dano contínuo de 1d6 por turno em área grande. Ninguém enxerga nada.
+V. MERCÚRIO (O Nervo)
+Velocidade, Tempo, Eletricidade e Roubo.
+1. Overclock (Ação Extra/Tempo)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Seu sistema nervoso acelera tanto que o mundo parece parar.
+A Escala:
+Órbita 1-4: Você ganha 1 Movimento extra gratuito no turno.
+Órbita 5-8: Você ganha 1 Ação Principal extra (pode atacar duas vezes), mas sofre 1 de dano por atrito/stress.
+Órbita 9-10: Você tem um turno inteiro extra antes de qualquer outra pessoa agir na próxima rodada. Depois, você vomita sangue (3 dano).
+2. Salto de Frequência (Teleporte)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você se move tão rápido que parece teletransporte.
+A Escala:
+Órbita 1-4: Teleporta 5 metros para um lugar visível.
+Órbita 5-8: Teleporta 15 metros. Pode levar um objeto pequeno ou pessoa voluntária (tocando).
+Órbita 9-10: Você vibra através de uma parede sólida ou porta trancada (até 1m de espessura).
+3. Mãos de Vento (Utilidade/Roubo)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Telecinese rápida ou roubo à distância.
+A Escala:
+Órbita 1-4: Puxa um item pequeno (chave, adaga) para sua mão a até 5m de distância.
+Órbita 5-8: Desarma um inimigo (Teste de Ferro dele vs seu Mercúrio). A arma voa para sua mão.
+Órbita 9-10: Você cria um vórtex que puxa todos os projéteis (flechas/balas) disparados em uma rodada para o chão, inofensivos.
+4. Sinapse Fulminante (Reação/Defesa)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você reage a um ataque antes dele acontecer.
+A Escala:
+Órbita 1-4: Você pode usar "Esquiva" como reação a um ataque (Rola Mercúrio para evitar dano total).
+Órbita 5-8: Você agarra a flecha ou a mão do atacante no ar. Contra-ataque imediato causa 1d4 dano.
+Órbita 9-10: Você corre pelas paredes da sala e reaparece atrás do inimigo que te atacou. O ataque dele erra automaticamente e você tem Vantagem no próximo.
+VI. JÚPITER (O Titã)
+Tamanho, Gravidade, Tempestade e Força.
+1. Pressão Atmosférica (Dano Gravitacional)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você aumenta a gravidade em um ponto, esmagando ossos.
+A Escala:
+Órbita 1-4: Um alvo sofre Dano igual à metade da sua Órbita (arredondado para cima). Ignora armadura.
+Órbita 5-8: Você derruba e prende no chão todos os inimigos num raio de 3m. Eles precisam de um teste de Força difícil para levantar.
+Órbita 9-10: "Buraco Negro". Um ponto suga tudo. Dano massivo (2d6) em área e destrói estruturas de madeira.
+2. Titã da Tempestade (Buff/Tamanho)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Seus músculos incham e você parece ter 3 metros de altura.
+A Escala:
+Órbita 1-4: Vantagem em testes de Ferro (Força) e +1 Dano corpo a corpo.
+Órbita 5-8: Você conta como tamanho "Grande". Pode segurar portas contra exércitos. +2 Dano corpo a corpo.
+Órbita 9-10: Você cresce de verdade. Seus ataques jogam inimigos a 10 metros de distância. +4 PV temporários.
+3. Voz do Trovão (Controle Sônico)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você canaliza uma tempestade elétrica ou sônica.
+A Escala:
+Órbita 1-4: Um estalo elétrico. 1d6 Dano em um alvo de metal (armadura ou arma).
+Órbita 5-8: Onda de choque cônica. Empurra inimigos 5m para trás e causa 1d4 dano.
+Órbita 9-10: Você convoca um raio do céu (se estiver fora) ou uma descarga estática (se dentro). 3d6 de Dano em um alvo. O alvo explode se morrer.
+4. Campo Gravitacional (Defesa/Escudo)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Objetos flutuam ao seu redor, interceptando ataques.
+A Escala:
+Órbita 1-4: +1 na Defesa contra ataques à distância (flechas desviam).
+Órbita 5-8: Você pode redirecionar um ataque à distância que errar você para um inimigo próximo.
+Órbita 9-10: Nada te toca. Uma bolha de força repele qualquer criatura que tente chegar a 1m de você.
+VII. VÊNUS (O Jardim)
+Veneno, Prazer/Dor, Biologia e Controle.
+1. Esporos da Paixão/Dor (Debuff Químico)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você exala um gás colorido e doce.
+A Escala:
+Órbita 1-4: 1 Alvo fica enjoado. Desvantagem em ataques.
+Órbita 5-8: Nuvem de 3m. Inimigos na área ficam "Incapacitados" (alucinando prazer ou vomitando) por 1 turno.
+Órbita 9-10: O gás se torna ácido corrosivo. 1d6 Dano por turno a todos na área e derrete armaduras (perdem 1 RD permanentemente).
+2. Toque da Medusa (Paralisia/Social)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Seu toque ou olhar induz uma paralisia eufórica.
+A Escala:
+Órbita 1-4: Vantagem absoluta em testes de Persuasão/Sedução contra um alvo humanoide.
+Órbita 5-8: Toque paralisante. Se você tocar a pele de alguém, ele deve passar num teste de Ferro ou fica paralisado por 1d4 rodadas.
+Órbita 9-10: "Amor Eterno". O alvo se torna seu escravo leal por 1 hora. Ele lutará até a morte por você.
+3. Jardim de Espinhos (Controle de Área)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Vinhas e espinhos rasgam sua pele ou brotam do chão.
+A Escala:
+Órbita 1-4: Chicote de vinha. Ataque a distância (5m) com 1d4 dano.
+Órbita 5-8: O chão num raio de 5m vira terreno difícil coberto de espinhos. Quem andar toma 1 dano por metro.
+Órbita 9-10: As plantas crescem dentro de um inimigo ferido. 2d6 dano automático e ele fica imobilizado.
+4. Regeneração Parasitária (Cura/Roubo de Vida)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você rouba vitalidade de plantas ou pessoas.
+A Escala:
+Órbita 1-4: Murcha plantas ao redor para curar 2 PV em si mesmo.
+Órbita 5-8: Toque Vampírico. Causa 1d4 dano num inimigo e cura a mesma quantia em você.
+Órbita 9-10: Você exala uma nuvem de esporos curativos. Todos os aliados (incluindo você) recuperam 1d6 PV, mas ganham uma cicatriz em forma de flor.
+VIII. SATURNO (O Juiz do Tempo)
+Tempo, Frio, Morte e Entropia.
+1. Toque de Entropia (Destruição de Matéria)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você envelhece objetos até virarem pó.
+A Escala:
+Órbita 1-4: Destrói objetos pequenos e não mágicos (cordas, fechaduras, dobradiças).
+Órbita 5-8: Enferruja uma arma ou armadura inimiga instantaneamente. A arma quebra (-1 dano) ou armadura perde 1 RD.
+Órbita 9-10: Transforma uma parede de pedra ou porta de ferro em areia. Abre passagem onde não existe.
+2. Cronóstase (Controle de Tempo)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você rouba segundos do relógio.
+A Escala:
+Órbita 1-4: Um inimigo alvo age por último na próxima rodada, independentemente da iniciativa.
+Órbita 5-8: "Slow Motion". Um alvo tem apenas 1 ação (Movimento ou Ataque, não os dois) por 2 turnos.
+Órbita 9-10: Parar o Tempo. O tempo para por 10 segundos. Você pode fazer o que quiser (beber poção, fugir), mas se atacar, o tempo volta.
+3. Sopro do Vazio (Dano/Frio)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: A temperatura cai para o zero absoluto ao seu redor.
+A Escala:
+Órbita 1-4: Apaga todas as luzes não-mágicas na sala. Inimigos tremem (-1 em ataques).
+Órbita 5-8: Cone de Frio. 2d6 de Dano de Gelo. Se matar, o alvo vira uma estátua de gelo quebradiça.
+Órbita 9-10: "A Morte Térmica". Todo líquido num raio de 10m congela (incluindo poções). Inimigos sofrem 1d6 dano direto na vitalidade (ignora armadura).
+4. O Ceifador (Dano/Execução)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você visualiza a morte do oponente e a torna real.
+A Escala:
+Órbita 1-4: Você sabe exatamente quantos PV o inimigo tem.
+Órbita 5-8: Se você atacar um inimigo que já agiu no turno, causa +1d6 de Dano necrótico.
+Órbita 9-10: "Sentença". Aponte para um inimigo com 5 PV ou menos. Ele morre instantaneamente, sem teste. O coração dele simplesmente para.
+IX. NETUNO (O Mártir)
+Profundezas, Sacrifício, Água e Pressão.
+1. Transfusão Abissal (Cura/Sacrifício)
+Habilidade Original do Manual - Adaptada.
+O Custo: Aumente sua Órbita em +2 (Custo Dobrado: Curar destrói sua mente rápido).
+O Efeito: Você toca um aliado ferido. A água do seu corpo purifica a ferida, fechando cortes.
+A Escala:
+Órbita 1-4: Cura 4 PV em um alvo tocado imediatamente.
+Órbita 5-8: Você pode dividir a cura. Ex: Curar 4 PV em um alvo, ou 2 PV em dois alvos diferentes.
+Órbita 9-10: "O Milagre Final". Você cura todos os aliados em 4 PV numa explosão de névoa salgada. (Sua Órbita vai instantaneamente para 10 após a ação).
+2. Afogamento Seco (Controle/Debuff)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você faz os pulmões de um inimigo se encherem de água salgada, mesmo em terra firme.
+A Escala:
+Órbita 1-4: O alvo engasga e tosse violentamente. Ele não pode falar, conjurar magias verbais ou gritar por socorro por 1 turno.
+Órbita 5-8: O alvo fica "Sufocado". Ele tem Desvantagem em todas as ações físicas e perde 1 Movimento tentando respirar.
+Órbita 9-10: A água inunda tudo. O alvo sofre 1d6 de dano direto na Vitalidade (ignora armadura) e cai inconsciente se falhar num teste de Ferro (Vigor).
+3. Corpo Liquefeito (Defesa/Esquiva)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Seu corpo perde a coesão sólida, transformando-se em um fluido viscoso ou água corrente por breves momentos.
+A Escala:
+Órbita 1-4: Você se solta automaticamente de qualquer agarramento, cordas ou correntes (escapa de algemas).
+Órbita 5-8: Por 1 rodada, você ganha Resistência a Dano Físico (Todo dano de corte/impacto é reduzido pela metade). Lâminas passam através de você.
+Órbita 9-10: Você pode passar por frestas de portas ou ralos e reaparecer do outro lado. Durante esse movimento, você é imune a dano.
+4. Pressão Esmagadora (Dano/Área)
+O Custo: Aumente sua Órbita em +1.
+O Efeito: Você simula a pressão do fundo do oceano em uma área, esmagando armaduras e ossos.
+A Escala:
+Órbita 1-4: Um alvo sofre 1d6 de Dano de Contusão. Se ele estiver usando armadura pesada (Metal), ele sofre +2 de dano extra (o metal amassa).
+Órbita 5-8: Zona de Alta Pressão (3m de raio). Todos na área se movem com metade do deslocamento e projéteis (flechas/balas) que entram na área caem no chão imediatamente.
+Órbita 9-10: "Implosão". Um alvo humanoide deve passar num teste de Ferro ou seus tímpanos estouram e ele sofre 2d6 de dano interno, ficando atordoado.

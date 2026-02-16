@@ -6,6 +6,7 @@ import CharacterCreationWizard from '@/components/CharacterCreationWizard';
 import { CharacterProvider, useCharacter } from '@/contexts/CharacterContext';
 import { ConnectionStatus } from '@/components/ConnectionStatus';
 import { VisualOverlay } from '@/components/VisualOverlay';
+import { CharacterSelection } from '@/components/CharacterSelection';
 
 const AppContent = () => {
   const { character, dbInfo, view, setView } = useCharacter();
@@ -32,13 +33,17 @@ const AppContent = () => {
 
   // Voltar para o lobby se a sala for deixada
   useEffect(() => {
-    if (!dbInfo.roomId && view !== 'lobby') {
+    if (!dbInfo.roomId && view !== 'lobby' && view !== 'selection') {
       setView('lobby');
     }
   }, [dbInfo.roomId, view]);
 
   if (view === 'lobby') {
     return <Lobby onJoin={() => setView('sheet')} onGM={() => setView('gm')} />;
+  }
+
+  if (view === 'selection') {
+    return <CharacterSelection />;
   }
 
   if (view === 'gm') {
@@ -59,14 +64,20 @@ const AppContent = () => {
   );
 };
 
+import { AuthProvider } from '@/contexts/AuthContext';
+
+// ... other imports
+
 const App = () => {
   return (
-    <CharacterProvider>
-      <ConnectionStatus />
-      <VisualOverlay />
-      {/* Background Ambience */}
-      <AppContent />
-    </CharacterProvider>
+    <AuthProvider>
+      <CharacterProvider>
+        <ConnectionStatus />
+        <VisualOverlay />
+        {/* Background Ambience */}
+        <AppContent />
+      </CharacterProvider>
+    </AuthProvider>
   );
 };
 

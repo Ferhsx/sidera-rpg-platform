@@ -18,7 +18,6 @@ export class RoomService {
             if (error) throw error;
             return data;
         } catch (error: any) {
-            console.error('RoomService.create error:', error);
             toast.error('Erro ao criar sala');
             throw error;
         }
@@ -40,7 +39,6 @@ export class RoomService {
 
             return data;
         } catch (error: any) {
-            console.error('RoomService.join error:', error);
             toast.error('Sala não encontrada ou erro de conexão');
             throw error;
         }

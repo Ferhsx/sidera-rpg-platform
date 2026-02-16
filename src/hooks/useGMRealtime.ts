@@ -29,10 +29,8 @@ export const useGMRealtime = () => {
         else if (event === 'loot_alert') channel = channelLoot.current;
 
         if (!channel || !roomId) {
-            console.error(`Broadcast falhou: Canal para ${event} não inicializado.`);
             return;
         }
-        // console.log(`Enviando Realtime [${event}] via ${channel.topic}:`, payload);
         await channel.send({
             type: 'broadcast',
             event,
@@ -49,7 +47,6 @@ export const useGMRealtime = () => {
                 setPlayers(chars as DBCharacter[]);
             }
         } catch (e) {
-            console.error(e);
         }
         setLoading(false);
     };
@@ -86,7 +83,6 @@ export const useGMRealtime = () => {
                     setPlayers(initialChars as DBCharacter[]);
                 }
             } catch (e) {
-                console.error(e);
             }
             setLoading(false);
 

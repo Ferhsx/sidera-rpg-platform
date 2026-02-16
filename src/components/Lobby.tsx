@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import { Eye, User, ArrowRight, Loader2, Zap } from 'lucide-react';
+import { Eye, User, ArrowRight, Loader2, Zap, LogIn } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useCharacter } from '@/contexts/CharacterContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { CampaignDashboard } from '@/components/CampaignDashboard';
+import { AuthModal } from '@/components/AuthModal';
+
 
 interface LobbyProps {
     onJoin: () => void; // Função para mudar a tela para a Ficha
@@ -9,13 +13,20 @@ interface LobbyProps {
 }
 
 export const Lobby: React.FC<LobbyProps> = ({ onJoin, onGM }) => {
-    const { updateCharacter, setDbInfo } = useCharacter(); // Vamos criar setDbInfo no passo 2
+    const { updateCharacter, setDbInfo, setPendingRoomCode, setView } = useCharacter();
+    const { user } = useAuth();
     const [mode, setMode] = useState<'player' | 'gm'>('player');
     const [loading, setLoading] = useState(false);
+    const [isAuthOpen, setIsAuthOpen] = useState(false);
 
     // Form States
     const [playerName, setPlayerName] = useState('');
     const [roomCode, setRoomCode] = useState('');
+
+    // If GM is authenticated, show Campaign Dashboard instead of lobby
+    if (user && mode === 'gm') {
+        return <CampaignDashboard />;
+    }
 
     // --- LÓGICA DE JOGADOR: ENTRAR NA SALA ---
     const handleJoinRoom = async () => {
@@ -68,7 +79,7 @@ export const Lobby: React.FC<LobbyProps> = ({ onJoin, onGM }) => {
         }
     };
 
-    // --- LÓGICA DE MESTRE: CRIAR SALA ---
+    // --- LÓGICA DE MESTRE: CRIAR SALA (Guest Mode for unauthenticated GMs) ---
     const handleCreateRoom = async () => {
         setLoading(true);
         try {
@@ -77,7 +88,12 @@ export const Lobby: React.FC<LobbyProps> = ({ onJoin, onGM }) => {
 
             const { data: room, error } = await supabase
                 .from('rooms')
-                .insert([{ code: code }])
+                .insert([{
+                    code: code,
+                    campaign_name: 'Sessão Rápida',
+                    status: 'active',
+                    gm_user_id: null // Explicitly set as guest session
+                }])
                 .select()
                 .single();
 
@@ -105,6 +121,23 @@ export const Lobby: React.FC<LobbyProps> = ({ onJoin, onGM }) => {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-stone-900/40 via-black to-black pointer-events-none" />
 
             <div className="w-full max-w-md bg-stone-900/50 border border-stone-800 p-8 rounded-sm backdrop-blur-sm relative z-10 shadow-2xl">
+                {/* Login Button (Top Right) */}
+                <div className="absolute top-4 right-4">
+                    {user ? (
+                        <span className="text-[10px] text-stone-500 uppercase tracking-widest">
+                            {user.email?.split('@')[0]}
+                        </span>
+                    ) : (
+                        <button
+                            onClick={() => setIsAuthOpen(true)}
+                            className="flex items-center gap-2 text-stone-500 hover:text-gold transition-colors text-xs uppercase tracking-widest border border-stone-800 hover:border-gold px-3 py-1 rounded-sm"
+                        >
+                            <LogIn size={14} />
+                            Login
+                        </button>
+                    )}
+                </div>
+
                 <h1 className="font-serif text-4xl text-center text-bone mb-2 tracking-widest">SIDERA</h1>
                 <p className="text-center text-rust text-xs uppercase tracking-[0.3em] mb-8">Protocolo de Vínculo</p>
 
@@ -127,19 +160,6 @@ export const Lobby: React.FC<LobbyProps> = ({ onJoin, onGM }) => {
                 {mode === 'player' ? (
                     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
                         <div className="space-y-1">
-                            <label className="text-xs text-stone-500 uppercase">Seu Nome</label>
-                            <div className="flex items-center gap-2 border-b border-stone-700 pb-1">
-                                <User size={16} className="text-stone-500" />
-                                <input
-                                    value={playerName}
-                                    onChange={e => setPlayerName(e.target.value)}
-                                    className="bg-transparent w-full outline-none text-white font-serif placeholder:text-stone-700"
-                                    placeholder="Ex: Darius"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="space-y-1">
                             <label className="text-xs text-stone-500 uppercase">Frequência (Código da Sala)</label>
                             <div className="flex items-center gap-2 border-b border-stone-700 pb-1">
                                 <Zap size={16} className="text-stone-500" />
@@ -153,11 +173,16 @@ export const Lobby: React.FC<LobbyProps> = ({ onJoin, onGM }) => {
                         </div>
 
                         <button
-                            onClick={handleJoinRoom}
+                            onClick={() => {
+                                if (!roomCode) return alert("Digite o código da sala.");
+                                setPendingRoomCode(roomCode);
+                                updateCharacter({ name: '' }); // Reset name just in case
+                                setView('selection');
+                            }}
                             disabled={loading}
                             className="w-full bg-rust hover:bg-orange-900 text-white font-bold py-3 uppercase tracking-widest text-xs flex items-center justify-center gap-2 mt-4 transition-all disabled:opacity-50"
                         >
-                            {loading ? <Loader2 className="animate-spin" /> : <>Estabelecer Conexão <ArrowRight size={16} /></>}
+                            {loading ? <Loader2 className="animate-spin" /> : <>Selecionar Vinculado <ArrowRight size={16} /></>}
                         </button>
                     </div>
                 ) : (
@@ -165,19 +190,31 @@ export const Lobby: React.FC<LobbyProps> = ({ onJoin, onGM }) => {
                         <div className="bg-stone-950/50 p-6 rounded border border-stone-800">
                             <Eye className="mx-auto text-gold mb-4" size={32} />
                             <p className="text-stone-400 text-sm mb-4 leading-relaxed">
-                                Como Observador, você criará um universo onde os Vinculados sofrerão.
+                                {user
+                                    ? "Como Observador autenticado, você pode gerenciar campanhas persistentes."
+                                    : "Como Observador convidado, você criará uma sessão rápida descartável."}
                             </p>
-                            <button
-                                onClick={handleCreateRoom}
-                                disabled={loading}
-                                className="w-full bg-stone-800 hover:bg-gold hover:text-black border border-gold/30 text-gold font-bold py-3 uppercase tracking-widest text-xs flex items-center justify-center gap-2 transition-all disabled:opacity-50"
-                            >
-                                {loading ? <Loader2 className="animate-spin" /> : "Criar Nova Sessão"}
-                            </button>
+                            {!user && (
+                                <>
+                                    <button
+                                        onClick={handleCreateRoom}
+                                        disabled={loading}
+                                        className="w-full bg-stone-800 hover:bg-gold hover:text-black border border-gold/30 text-gold font-bold py-3 uppercase tracking-widest text-xs flex items-center justify-center gap-2 transition-all disabled:opacity-50 mb-3"
+                                    >
+                                        {loading ? <Loader2 className="animate-spin" /> : "Sessão Rápida (Convidado)"}
+                                    </button>
+                                    <p className="text-[10px] text-stone-600 uppercase tracking-widest">
+                                        Faça login para campanhas persistentes
+                                    </p>
+                                </>
+                            )}
                         </div>
                     </div>
                 )}
             </div>
+
+            {/* Auth Modal */}
+            <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
         </div>
     );
 };

@@ -42,7 +42,6 @@ const GMDashboard: React.FC = () => {
             if (selectedPlayerId === playerId) setSelectedPlayerId(null);
             refreshPlayers();
         } catch (e) {
-            console.error("Erro ao expulsar:", e);
             alert("Falha ao expulsar jogador.");
         }
     };

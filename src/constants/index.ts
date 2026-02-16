@@ -172,3 +172,38 @@ export const PILLARS: Pillar[] = [
     icon: 'scale'
   }
 ];
+
+import { CharacterData } from "@/types/index";
+
+export const INITIAL_CHARACTER: CharacterData = {
+  name: '',
+  background: '',
+  backgroundId: '',
+  backgroundSkills: [],
+  archetypeId: '',
+  astralPowerId: '',
+  attributes: { ferro: 0, mercurio: 0, enxofre: 0, sal: 0 },
+  currentHp: 10,
+  maxHp: 10,
+  orbit: 0,
+  deathFailures: 0,
+  isStabilized: false,
+  pendingScar: false,
+  scars: [],
+  armorRating: 0,
+  armorName: 'Roupas',
+  silver: 0,
+  inventorySlots: [],
+  notes: '',
+  arsenal: [],
+  conditions: [],
+  beltPouch: [
+    { id: 'lead', name: 'Chumbo Líquido', quantity: 1 },
+    { id: 'serum', name: 'Soro Estelar', quantity: 0 },
+    { id: 'ration', name: 'Ração de Viagem', quantity: 3 },
+    { id: 'poppy', name: 'Papoila Branca', quantity: 0 },
+    { id: 'salts', name: 'Sais de Cheiro', quantity: 0 }
+  ],
+  wizardCompleted: false,
+  customAbilities: []
+};

@@ -33,7 +33,6 @@ export class CharacterService {
             return await this.save(characterId, mergedData);
 
         } catch (error: any) {
-            console.error('CharacterService.update error:', error);
             toast.error('Erro ao atualizar personagem');
             throw error;
         }
@@ -52,7 +51,6 @@ export class CharacterService {
             if (error) throw error;
             return data || [];
         } catch (error: any) {
-            console.error('CharacterService.getByRoomId error:', error);
             throw error;
         }
     }
@@ -76,7 +74,6 @@ export class CharacterService {
             if (error) throw error;
             return true;
         } catch (error: any) {
-            console.error('CharacterService.save error:', error);
             // toast.error('Erro de sincronização'); // Might be too noisy for auto-save
             throw error;
         }
@@ -95,7 +92,6 @@ export class CharacterService {
             if (error) throw error;
             return true;
         } catch (error: any) {
-            console.error('CharacterService.leaveRoom error:', error);
             toast.error('Erro ao sair da sala');
             throw error;
         }
@@ -114,7 +110,6 @@ export class CharacterService {
             if (error) throw error;
             return true;
         } catch (error: any) {
-            console.error('CharacterService.delete error:', error);
             toast.error('Erro ao excluir personagem');
             throw error;
         }

@@ -21,9 +21,7 @@ export const logEvent = async (
             });
 
         if (error) {
-            console.error('Error logging event:', error);
         }
     } catch (err) {
-        console.error('Failed to log event:', err);
     }
 };

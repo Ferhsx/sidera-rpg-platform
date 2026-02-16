@@ -34,7 +34,6 @@ export const useImageUpload = () => {
             return data.publicUrl;
 
         } catch (error: any) {
-            console.error("Erro no upload:", error);
             alert("Erro no upload: " + (error.message || "Falha desconhecida"));
             return null;
         } finally {

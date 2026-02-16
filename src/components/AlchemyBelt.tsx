@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     FlaskConical, Syringe, Skull, Sparkles,
-    Flower2, Wind, Activity, Tent
+    Flower2, Wind, Activity, Tent, Zap
 } from 'lucide-react';
 import { useCharacter } from '@/contexts/CharacterContext';
 import { Condition } from '@/types/index';
@@ -201,6 +201,27 @@ const AlchemyBelt: React.FC = () => {
                     id="salts" name="Sais" icon={Wind} color="text-yellow-400"
                     action={useSalts} rule="Limpeza"
                 />
+
+                {/* Astral Power Shortcut */}
+                <div className="mt-2 pt-2 border-t border-stone-800">
+                    <button
+                        onClick={() => {
+                            const event = new CustomEvent('trigger-manifest');
+                            window.dispatchEvent(event);
+                        }}
+                        className="w-full flex items-center justify-between p-2 rounded-sm border border-gold/30 bg-gold/5 hover:bg-gold/10 transition-all group"
+                    >
+                        <div className="flex items-center gap-3">
+                            <div className="p-2 rounded bg-black/40 border border-gold/50 text-gold group-hover:scale-110 transition-transform">
+                                <Zap size={14} />
+                            </div>
+                            <div className="flex flex-col leading-tight text-left">
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-gold">Manifestar Poder</span>
+                                <span className="text-[8px] font-mono text-stone-500 italic">Gasta Órbita</span>
+                            </div>
+                        </div>
+                    </button>
+                </div>
             </div>
         </div>
     );

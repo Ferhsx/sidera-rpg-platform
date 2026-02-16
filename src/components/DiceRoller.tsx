@@ -167,8 +167,6 @@ const DiceRoller: React.FC<DiceRollerProps> = ({
     }, ...prev.slice(0, 2)]);
 
     // Log for debug/user
-    if (socialPenalty > 0) console.log(`Penalidade Social: -${socialPenalty}`);
-    if (selfDamage > 0) console.log(`Dano Crítico: -${selfDamage}`);
   };
 
   const rollFreeDie = (count: number, faces: number) => {

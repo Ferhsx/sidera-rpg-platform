@@ -89,7 +89,10 @@ export interface Weapon {
 export interface CharacterData {
     name: string;
     background: string;
+    backgroundId: string;
+    backgroundSkills: string[];
     archetypeId: string;
+    astralPowerId: string;
     attributes: Attributes;
     currentHp: number;
     maxHp: number; // Calculated
@@ -109,6 +112,12 @@ export interface CharacterData {
     wizardCompleted: boolean;
     imageUrl?: string; // Novo: Avatar Visual
     customAbilities: CustomAbility[]; // Novo campo
+    // Lore & Roleplay
+    age?: string;
+    appearance?: string;
+    history?: string;
+    motivations?: string;
+    id?: string; // Local helper ID
 }
 
 export interface LootItem {
