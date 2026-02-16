@@ -201,11 +201,14 @@ const CharacterCreationWizard: React.FC = () => {
                                                 ...filteredArsenal,
                                                 {
                                                     id: Math.random().toString(36).substr(2, 9),
+                                                    catalogId: bg.startingItem.name.toLowerCase().replace(/\s+/g, '-'),
                                                     name: bg.startingItem.name,
                                                     description: bg.startingItem.description,
-                                                    damage: bg.name === 'Lenhador' ? '3' : '2', // Default logic or specific
-                                                    weight: bg.startingItem.weight.toString(),
-                                                    category: bg.name === 'Lenhador' ? 'Heavy' : 'Melee',
+                                                    damage: bg.name === 'Lenhador' ? 3 : 2,
+                                                    weight: bg.startingItem.weight,
+                                                    category: bg.name === 'Lenhador' ? 'Heavy' : 'Medium',
+                                                    range: 'Melee',
+                                                    cost: 0,
                                                     properties: [],
                                                     status: 'ready'
                                                 }
