@@ -59,7 +59,8 @@ export const Lobby: React.FC<LobbyProps> = ({ onJoin, onGM }) => {
                     {
                         room_id: room.id,
                         player_name: playerName,
-                        character_data: initialData
+                        character_data: initialData,
+                        user_id: user?.id ?? null
                     }
                 ])
                 .select()

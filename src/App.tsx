@@ -66,7 +66,6 @@ const AppContent = () => {
 
 import { AuthProvider } from '@/contexts/AuthContext';
 
-// ... other imports
 
 const App = () => {
   return (
